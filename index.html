@@ -9,22 +9,29 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: "Cinzel"; src: url("assets/fonts/Cinzel.ttf") format("truetype"); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Montserrat"; src: url("assets/fonts/Montserrat.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
 
+/* DA Lusciana Studios (2brain : 10_INFORMATIONS\Lusciana\da_logo_2026-11-26\DA_LUSCIANA.txt)
+   palette mesurée sur LogoLusciana.ai + cyan du trailer ; polices du trailer (Cinzel / Montserrat) + Inter */
 :root {
-  --night: #04060c;          /* fond */
-  --deep: #07142a;           /* bleu nuit des sections */
-  --royal: #0052a6;          /* bleu du logo */
-  --wave: #0170d0;           /* vagues du logo */
-  --accent: #77e0f5;         /* cyan du site actuel */
-  --moon: #f7f2d8;           /* crème de la lune */
-  --text: #eef2f8;
-  --muted: #9aa8bd;
-  --line: rgba(119, 224, 245, .18);
-  --card: rgba(10, 22, 44, .62);
-  --radius: 18px;
+  --night: #010b18;          /* ombre du logo, fond */
+  --deep: #00254d;           /* bleu nuit des sections */
+  --royal: #004180;          /* fond du logo */
+  --halo: #195fa3;           /* halo derrière la lune */
+  --wave: #1b6dbd;           /* vague moyenne */
+  --wave-light: #308ce6;     /* vague claire */
+  --wave-dark: #0b69c4;      /* vague foncée */
+  --accent: #46d2f0;         /* cyan du trailer */
+  --moon: #fbf9f8;           /* blanc de la lune */
+  --moon-tint: #c4dbf2;      /* reflet bleuté de la lune */
+  --text: #eef3fb;
+  --muted: #9fb2cc;
+  --line: rgba(70, 210, 240, .18);
+  --card: rgba(0, 37, 77, .62);
+  --radius: 22px;            /* coins du logo (squircle) */
   --display: "Cinzel", Georgia, serif;
   --label: "Montserrat", system-ui, sans-serif;
   --body: "Inter", system-ui, sans-serif;
@@ -43,9 +50,9 @@ h2 { font-size: clamp(30px, 4.2vw, 48px); line-height: 1.12; }
 /* ---------- boutons ---------- */
 .btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 26px; border-radius: 999px; font: 600 13px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; cursor: pointer; border: 1px solid transparent; transition: transform .2s, background .2s, border-color .2s, box-shadow .2s; }
 .btn:hover { transform: translateY(-2px); }
-.btn-primary { background: linear-gradient(135deg, var(--wave), var(--royal)); color: #fff; box-shadow: 0 10px 30px rgba(1, 112, 208, .35); }
-.btn-primary:hover { box-shadow: 0 14px 38px rgba(1, 112, 208, .5); }
-.btn-ghost { border-color: rgba(255,255,255,.35); color: #fff; background: rgba(4, 6, 12, .25); backdrop-filter: blur(6px); }
+.btn-primary { background: linear-gradient(135deg, var(--wave-light), var(--wave-dark) 55%, var(--royal)); color: #fff; box-shadow: 0 10px 30px rgba(27, 109, 189, .35); }
+.btn-primary:hover { box-shadow: 0 14px 38px rgba(27, 109, 189, .5); }
+.btn-ghost { border-color: rgba(255,255,255,.35); color: #fff; background: rgba(1, 11, 24, .25); backdrop-filter: blur(6px); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .play { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.14); margin: -9px 0 -9px -12px; }
 .play svg { width: 12px; height: 12px; margin-left: 2px; fill: currentColor; }
@@ -53,7 +60,7 @@ h2 { font-size: clamp(30px, 4.2vw, 48px); line-height: 1.12; }
 
 /* ---------- en-tête ---------- */
 header { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
-header.scrolled { background: rgba(4, 6, 12, .78); backdrop-filter: blur(14px); border-color: var(--line); }
+header.scrolled { background: rgba(1, 11, 24, .78); backdrop-filter: blur(14px); border-color: var(--line); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 78px; }
 .brand { display: flex; align-items: center; gap: 12px; }
 .brand img { width: 40px; height: 40px; }
@@ -65,27 +72,28 @@ header.scrolled { background: rgba(4, 6, 12, .78); backdrop-filter: blur(14px); 
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .lang { display: flex; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; overflow: hidden; }
 .lang button { background: none; border: 0; color: var(--muted); font: 600 12px/1 var(--label); letter-spacing: .12em; padding: 9px 13px; cursor: pointer; }
-.lang button[aria-pressed="true"] { color: var(--accent); background: rgba(119, 224, 245, .08); }
+.lang button[aria-pressed="true"] { color: var(--accent); background: rgba(70, 210, 240, .08); }
 .nav .btn { padding: 12px 20px; font-size: 11px; }
 
 /* ---------- héros avec le trailer ---------- */
 .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; }
 .hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero::after { content: ""; position: absolute; inset: 0; background:
-  linear-gradient(90deg, rgba(4,6,12,.92) 0%, rgba(4,6,12,.62) 42%, rgba(4,6,12,.15) 75%),
-  linear-gradient(0deg, var(--night) 0%, rgba(4,6,12,0) 28%),
-  linear-gradient(180deg, rgba(4,6,12,.55) 0%, rgba(4,6,12,0) 22%); }
+  radial-gradient(640px 460px at 18% 42%, rgba(25, 95, 163, .38), rgba(25, 95, 163, 0) 70%),
+  linear-gradient(90deg, rgba(1, 11, 24,.92) 0%, rgba(1, 11, 24,.62) 42%, rgba(1, 11, 24,.15) 75%),
+  linear-gradient(0deg, var(--night) 0%, rgba(1, 11, 24,0) 28%),
+  linear-gradient(180deg, rgba(1, 11, 24,.55) 0%, rgba(1, 11, 24,0) 22%); }
 .hero-content { position: relative; z-index: 2; padding: 120px 0 90px; }
 .hero h1 { font-size: clamp(46px, 8.6vw, 112px); line-height: .98; font-weight: 600; letter-spacing: .03em; text-shadow: 0 6px 40px rgba(0,0,0,.45); }
 .divider { display: flex; align-items: center; gap: 14px; width: min(460px, 100%); margin: 30px 0 24px; color: var(--accent); }
-.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(119,224,245,0), rgba(119,224,245,.6)); }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(70, 210, 240,0), rgba(70, 210, 240,.6)); }
 .divider::after { transform: scaleX(-1); }
-.divider i { width: 9px; height: 9px; border: 1.5px solid currentColor; transform: rotate(45deg); }
+.divider i { width: 14px; height: 14px; border-radius: 50%; box-shadow: -3px 3px 0 0 var(--moon); transform: translate(2px, -2px); }
 .tags { font: 600 13px/1.6 var(--label); letter-spacing: .26em; text-transform: uppercase; color: #dfe6f1; }
 .tags span { color: var(--accent); margin: 0 .15em; }
 .hero p.sub { color: #c4cddb; max-width: 520px; margin: 18px 0 34px; font-size: 17px; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
-.hero-foot { position: absolute; z-index: 2; left: 0; right: 0; bottom: 28px; display: flex; justify-content: space-between; align-items: end; font: 500 11px/1.7 var(--label); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.hero-foot { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(78px, 10.5vw, 150px); display: flex; justify-content: space-between; align-items: end; font: 500 11px/1.7 var(--label); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
 .scroll { display: flex; align-items: center; gap: 12px; }
 .scroll i { width: 1px; height: 42px; background: linear-gradient(var(--accent), transparent); animation: drip 2.2s infinite; }
 @keyframes drip { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
@@ -97,7 +105,7 @@ section { padding: 120px 0; position: relative; }
 
 /* bande de chiffres-clés / promesses */
 .promise { padding: 0; margin-top: -1px; }
-.promise .grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(7,20,42,.7), rgba(4,6,12,.4)); }
+.promise .grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(0, 37, 77,.7), rgba(1, 11, 24,.4)); }
 .promise .item { padding: 28px 26px; border-left: 1px solid var(--line); }
 .promise .item:first-child { border-left: 0; }
 .promise b { display: block; font: 600 22px/1.2 var(--display); color: var(--moon); margin-bottom: 6px; }
@@ -106,20 +114,20 @@ section { padding: 120px 0; position: relative; }
 /* services */
 .services .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; transition: transform .25s, border-color .25s, background .25s; }
-.card:hover { transform: translateY(-4px); border-color: rgba(119, 224, 245, .45); background: rgba(12, 30, 60, .75); }
-.card .ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(1,112,208,.35), rgba(0,82,166,.15)); color: var(--accent); margin-bottom: 22px; }
+.card:hover { transform: translateY(-4px); border-color: rgba(70, 210, 240, .45); background: rgba(0, 52, 104, .75); }
+.card .ico { width: 50px; height: 50px; border-radius: 30%; display: grid; place-items: center; background: radial-gradient(circle at 50% 35%, var(--halo), var(--royal) 75%); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 20px rgba(0, 12, 23, .5); color: var(--moon); margin-bottom: 22px; }
 .card .ico svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .card h3 { font-size: 19px; margin-bottom: 10px; }
 .card p { margin: 0; color: var(--muted); font-size: 15px; }
 
 /* portfolio */
-.work { background: radial-gradient(1100px 500px at 80% 0%, rgba(1,112,208,.14), transparent 70%); }
+.work { background: radial-gradient(1100px 500px at 80% 0%, rgba(27, 109, 189,.14), transparent 70%); }
 .gallery { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 210px; gap: 14px; }
 .shot { position: relative; margin: 0; overflow: hidden; border-radius: 14px; grid-column: span 4; background: var(--deep); }
 .shot.big { grid-column: span 8; grid-row: span 2; }
 .shot.tall { grid-row: span 2; }
 .shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s; filter: saturate(.92); }
-.shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,6,12,.85), rgba(4,6,12,0) 55%); opacity: .75; transition: opacity .3s; }
+.shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(1, 11, 24,.85), rgba(1, 11, 24,0) 55%); opacity: .75; transition: opacity .3s; }
 .shot figcaption { position: absolute; left: 18px; bottom: 16px; z-index: 2; }
 .shot figcaption b { display: block; font: 600 18px/1.2 var(--display); letter-spacing: .06em; }
 .shot figcaption span { font: 600 10px/1 var(--label); letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
@@ -136,7 +144,7 @@ section { padding: 120px 0; position: relative; }
 .why li span { color: var(--muted); font-size: 15px; }
 .why .visual { position: relative; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--line); }
 .why .visual img { width: 100%; height: 100%; object-fit: cover; }
-.why .visual .badge { position: absolute; left: 20px; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; background: rgba(4,6,12,.72); backdrop-filter: blur(10px); border: 1px solid var(--line); }
+.why .visual .badge { position: absolute; left: 20px; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; background: rgba(1, 11, 24,.72); backdrop-filter: blur(10px); border: 1px solid var(--line); }
 .why .visual .badge img { width: 42px; height: 42px; }
 .why .visual .badge b { font: 600 14px/1.3 var(--label); }
 .why .visual .badge span { display: block; color: var(--muted); font-size: 13px; }
@@ -145,16 +153,42 @@ section { padding: 120px 0; position: relative; }
 .process { background: linear-gradient(180deg, var(--night), var(--deep) 60%, var(--night)); }
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: s; }
 .step { position: relative; padding: 30px 24px 26px; border-top: 1px solid var(--line); }
-.step::before { counter-increment: s; content: "0" counter(s); font: 600 44px/1 var(--display); color: rgba(119,224,245,.22); display: block; margin-bottom: 16px; }
-.step::after { content: ""; position: absolute; top: -4px; left: 24px; width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
+.step::before { counter-increment: s; content: "0" counter(s); font: 600 44px/1 var(--display); color: rgba(70, 210, 240,.22); display: block; margin-bottom: 16px; }
+.step::after { content: ""; position: absolute; top: -7px; left: 26px; width: 12px; height: 12px; border-radius: 50%; box-shadow: -3px 3px 0 0 var(--accent); }
 .step h3 { font-size: 18px; margin-bottom: 10px; }
 .step p { margin: 0; color: var(--muted); font-size: 15px; }
 
 /* appel final */
 .cta { padding: 0 0 120px; }
-.cta .box { position: relative; overflow: hidden; border-radius: 26px; padding: 80px 40px; text-align: center; border: 1px solid var(--line); background: linear-gradient(135deg, #0a3f86, #062452 55%, #04112a); }
-.cta .box::before { content: ""; position: absolute; width: 420px; height: 420px; right: -110px; top: -140px; border-radius: 50%; box-shadow: -60px 40px 0 0 var(--moon); opacity: .12; }
+.cta .box { position: relative; overflow: hidden; border-radius: 26px; padding: 80px 40px; text-align: center; border: 1px solid var(--line); background: radial-gradient(520px 380px at 50% 30%, var(--halo), rgba(25,95,163,0) 70%), linear-gradient(180deg, var(--royal), var(--deep) 70%, var(--night)); padding-bottom: 130px; }
+.cta .box::before { content: ""; position: absolute; width: 300px; height: 300px; right: -40px; top: -90px; border-radius: 50%; box-shadow: -46px 34px 0 0 var(--moon); opacity: .1; }
 .cta .box > * { position: relative; }
+.cta .box > .waves { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; }
+
+/* ---------- formes du logo : vagues, croissant, squircle ---------- */
+.waves { display: block; width: 100%; height: 120px; pointer-events: none; }
+.hero > .waves { position: absolute; left: 0; right: 0; bottom: -1px; z-index: 1; height: clamp(70px, 10vw, 140px); opacity: .9; }
+.crescent { display: inline-block; width: 1em; height: 1em; border-radius: 50%; box-shadow: -.22em .22em 0 0 currentColor; transform: translate(.15em, -.15em); }
+.slogan { font: 500 clamp(18px, 2vw, 24px)/1.3 var(--display); letter-spacing: .08em; color: var(--moon-tint); margin: 0 0 8px; }
+
+/* clients et partenaires */
+.trusted { padding: 70px 0 10px; }
+.trusted .eyebrow { text-align: center; color: var(--muted); margin-bottom: 26px; }
+.clients { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px; }
+.clients li { font: 600 clamp(18px, 2.2vw, 26px)/1 var(--display); letter-spacing: .14em; color: #cfdcee; opacity: .8; transition: opacity .2s, color .2s; }
+.clients li:hover { opacity: 1; color: var(--moon); }
+.partners { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
+.partner { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border-radius: 14px; border: 1px solid var(--line); background: rgba(0, 37, 77, .45); font: 600 12px/1.2 var(--label); letter-spacing: .12em; text-transform: uppercase; color: #dbe6f5; }
+.partner .crescent { color: var(--accent); font-size: 12px; }
+
+/* métiers */
+.crafts { list-style: none; margin: 34px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.crafts li { padding: 10px 16px; border-radius: 12px; background: linear-gradient(135deg, rgba(27,109,189,.22), rgba(0,65,128,.12)); border: 1px solid var(--line); font: 600 12px/1 var(--label); letter-spacing: .1em; text-transform: uppercase; color: #dbe6f5; }
+
+/* origine du nom */
+.origin { margin-top: 30px; padding: 20px 22px; border-radius: 18px; border: 1px solid var(--line); background: rgba(0, 37, 77, .35); display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: center; color: var(--muted); font-size: 15px; }
+.origin .crescent { font-size: 26px; color: var(--moon); }
+.origin b { color: var(--text); font-weight: 600; }
 .cta h2 { margin: 16px 0 14px; }
 .cta p { color: #c7d3e6; max-width: 560px; margin: 0 auto 34px; }
 .cta .row { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
@@ -166,7 +200,7 @@ footer a:hover { color: var(--accent); }
 
 /* ---------- lecteur du trailer ---------- */
 dialog.player { width: min(1180px, 94vw); padding: 0; border: 1px solid var(--line); border-radius: 18px; background: #000; color: #fff; overflow: hidden; }
-dialog.player::backdrop { background: rgba(2, 4, 9, .86); backdrop-filter: blur(6px); }
+dialog.player::backdrop { background: rgba(0, 6, 14, .86); backdrop-filter: blur(6px); }
 dialog.player video { width: 100%; aspect-ratio: 2 / 1; background: #000; }
 dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(0,0,0,.55); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
 
@@ -196,7 +230,7 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
   .gallery { grid-template-columns: 1fr; grid-auto-rows: 220px; }
   .shot, .shot.big, .shot.tall { grid-column: span 1; grid-row: span 1; }
   .hero-foot .scroll { display: none; }
-  .hero::after { background: linear-gradient(0deg, var(--night) 0%, rgba(4,6,12,.72) 45%, rgba(4,6,12,.45) 100%); }
+  .hero::after { background: linear-gradient(0deg, var(--night) 0%, rgba(1, 11, 24,.72) 45%, rgba(1, 11, 24,.45) 100%); }
   .cta .box { padding: 56px 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -207,6 +241,19 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
 </style>
 </head>
 <body>
+
+<!-- Les 3 vagues du logo, réutilisées en séparateur -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="wgBack" x1="0" x2="1"><stop offset="0" stop-color="#308ce6"/><stop offset="1" stop-color="#1578d9"/></linearGradient>
+    <linearGradient id="wgMid" x1="0" x2="1"><stop offset="0" stop-color="#2584e1"/><stop offset="1" stop-color="#0b69c4"/></linearGradient>
+    <symbol id="waves" viewBox="0 0 1440 140" preserveAspectRatio="none">
+      <path d="M0 62 C240 18 470 22 720 58 S1200 104 1440 44 V140 H0 Z" fill="url(#wgBack)" opacity=".55"/>
+      <path d="M0 92 C260 52 520 58 770 88 S1190 122 1440 80 V140 H0 Z" fill="url(#wgMid)" opacity=".8"/>
+      <path d="M0 118 C300 94 610 98 870 116 S1270 134 1440 112 V140 H0 Z" fill="#010b18"/>
+    </symbol>
+  </defs>
+</svg>
 
 <header id="top">
   <div class="wrap nav">
@@ -240,6 +287,7 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
       <p class="eyebrow" data-i18n="hero.eyebrow">Minecraft build studio</p>
       <h1>Lusciana<br>Studios</h1>
       <div class="divider" aria-hidden="true"><i></i></div>
+      <p class="slogan">Building worlds, shaping stories</p>
       <p class="tags" data-i18n-html="hero.tags">Maps <span>•</span> Spawns <span>•</span> Lobbies <span>•</span> Terraforming <span>•</span> Organics</p>
       <p class="sub" data-i18n="hero.sub">One contact, a full team of builders. We design and build the worlds your players will remember — on time, checked, ready to play.</p>
       <div class="hero-cta">
@@ -254,6 +302,7 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
       <span data-i18n-html="hero.foot">Lusciana Studios — Minecraft worlds<br>for servers, creators and the Marketplace</span>
       <span class="scroll"><span data-i18n="hero.scroll">Scroll</span><i></i></span>
     </div>
+    <svg class="waves" aria-hidden="true"><use href="#waves"/></svg>
   </section>
 
   <!-- PROMESSES -->
@@ -263,6 +312,22 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
       <div class="item"><b data-i18n="p2.t">A full team</b><span data-i18n="p2.d">Builders and terraformers working in parallel.</span></div>
       <div class="item"><b data-i18n="p3.t">Live follow-up</b><span data-i18n="p3.d">Watch your build grow on our private server.</span></div>
       <div class="item"><b data-i18n="p4.t">Quality checked</b><span data-i18n="p4.d">Internal review and fixes before delivery.</span></div>
+    </div>
+  </section>
+
+  <!-- CLIENTS ET PARTENAIRES (da.txt d'Antoine) -->
+  <section class="trusted" aria-label="Clients and partners">
+    <div class="wrap reveal">
+      <p class="eyebrow" data-i18n="t.eyebrow">They trusted us</p>
+      <ul class="clients">
+        <li>Alkazia</li><li>Oxilac</li><li>Ionix_TV</li><li>CobbleGems</li><li>Swift</li>
+      </ul>
+      <div class="partners">
+        <span class="partner"><i class="crescent" aria-hidden="true"></i><span data-i18n="t.pathway">Partner of Pathway Studios</span></span>
+        <span class="partner"><i class="crescent" aria-hidden="true"></i><span data-i18n="t.market">On the Minecraft Marketplace</span></span>
+        <span class="partner"><i class="crescent" aria-hidden="true"></i><span data-i18n="t.bbb">On BuiltByBit</span></span>
+        <span class="partner"><i class="crescent" aria-hidden="true"></i><span data-i18n="t.shop">Our own shop</span></span>
+      </div>
     </div>
   </section>
 
@@ -294,6 +359,13 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
           <h3 data-i18n="s4.t">Organics</h3>
           <p data-i18n="s4.d">Custom trees, creatures and statues that bring a world to life.</p>
         </article>
+      </div>
+      <div class="reveal">
+        <ul class="crafts" aria-label="Our crafts">
+          <li data-i18n="k1">Level designers</li><li data-i18n="k2">Builders</li><li data-i18n="k3">3D modelers</li><li data-i18n="k4">Game artists</li>
+          <li data-i18n="k5">Game designers</li><li data-i18n="k6">Developers</li><li data-i18n="k7">SFX artists</li><li data-i18n="k8">Texture pack makers</li>
+          <li data-i18n="k9">Terraformers</li><li data-i18n="k10">Graphic designers</li><li data-i18n="k11">Writers</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -332,8 +404,9 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
           <li class="reveal"><i>01</i><div><b data-i18n="y1.t">Faster big projects</b><span data-i18n="y1.d">Several builders and terraformers on your map at the same time.</span></div></li>
           <li class="reveal"><i>02</i><div><b data-i18n="y2.t">Deadlines kept</b><span data-i18n="y2.d">If a builder is unavailable, another one from the team takes over.</span></div></li>
           <li class="reveal"><i>03</i><div><b data-i18n="y3.t">Our own quality control</b><span data-i18n="y3.d">We review and fix everything before you see the final result.</span></div></li>
-          <li class="reveal"><i>04</i><div><b data-i18n="y4.t">Trusted by studios</b><span data-i18n="y4.d">We already deliver Marketplace content as a subcontractor, with NDA when needed.</span></div></li>
+          <li class="reveal"><i>04</i><div><b data-i18n="y4.t">Trusted by studios</b><span data-i18n="y4.d">Partner of Pathway Studios, we already deliver Minecraft Marketplace content, with NDA when needed.</span></div></li>
         </ul>
+        <p class="origin reveal"><i class="crescent" aria-hidden="true"></i><span data-i18n-html="y.origin"><b>Why the moon?</b> Lusciana comes from the Luscinia, a Japanese songbird of the night. “Lu” like lune, the moon: our white moon over blue water has been our mark from the very first build.</span></p>
       </div>
       <div class="visual reveal">
         <img src="assets/poster.jpg" alt="Giant tree from the Lusciana Studios trailer" loading="lazy">
@@ -369,6 +442,7 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
           <a class="btn btn-primary" href="https://lusciana.fr/devis" data-i18n="cta.quote2">Request a quote</a>
           <a class="btn btn-ghost" href="https://discord.gg/lusciana" target="_blank" rel="noopener" data-i18n="cta.discord">Join our Discord</a>
         </div>
+        <svg class="waves" aria-hidden="true"><use href="#waves"/></svg>
       </div>
     </div>
   </section>
@@ -383,7 +457,7 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
       <a href="https://discord.gg/lusciana" target="_blank" rel="noopener">Discord</a>
       <a href="mailto:luscianabuilds@gmail.com">luscianabuilds@gmail.com</a>
     </nav>
-    <span>© <span id="year"></span> Lusciana Studios</span>
+    <span>© <span id="year"></span> Lusciana Studios — <em>Building worlds, shaping stories</em></span>
   </div>
 </footer>
 
@@ -419,7 +493,12 @@ dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; w
     "y1.t": "Les gros projets avancent plus vite", "y1.d": "Plusieurs builders et terraformeurs sur votre map en même temps.",
     "y2.t": "Des deadlines tenues", "y2.d": "Si un builder est indisponible, un autre de l'équipe prend le relais.",
     "y3.t": "Notre propre contrôle qualité", "y3.d": "Nous relisons et corrigeons tout avant de vous montrer le résultat.",
-    "y4.t": "La confiance des studios", "y4.d": "Nous livrons déjà du contenu Marketplace en sous-traitance, avec NDA si besoin.",
+    "y4.t": "La confiance des studios", "y4.d": "Partenaires de Pathway Studios, nous livrons déjà du contenu pour le Minecraft Marketplace, avec NDA si besoin.",
+    "y.origin": "<b>Pourquoi la lune ?</b> Lusciana vient du Luscinia, un oiseau chanteur japonais de la nuit. « Lu » comme lune : notre lune blanche sur l'eau bleue nous accompagne depuis le tout premier build.",
+    "t.eyebrow": "Ils nous ont fait confiance", "t.pathway": "Partenaire de Pathway Studios", "t.market": "Sur le Minecraft Marketplace",
+    "t.bbb": "Sur BuiltByBit", "t.shop": "Notre propre boutique",
+    "k1": "Level designers", "k2": "Builders", "k3": "Modeleurs 3D", "k4": "Game artists", "k5": "Game designers", "k6": "Développeurs",
+    "k7": "Sound designers", "k8": "Texture packs", "k9": "Terraformeurs", "k10": "Graphistes", "k11": "Scénaristes",
     "y.badge": "Suivez votre build en direct sur notre serveur privé",
     "pr.eyebrow": "Comment ça marche", "pr.title": "De votre idée à votre serveur",
     "pr1.t": "Votre brief", "pr1.d": "Présentez votre projet sur Discord ou via notre formulaire de devis : style, taille, version, références.",
