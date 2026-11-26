@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lusciana Studios — Minecraft Build Studio</title>
+<meta name="description" content="Lusciana Studios builds Minecraft worlds: maps, spawns, lobbies, terraforming and organics. One contact, a full team of builders, deadlines kept.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: "Cinzel"; src: url("assets/fonts/Cinzel.ttf") format("truetype"); font-weight: 400 900; font-display: swap; }
+
+:root {
+  --night: #04060c;          /* fond */
+  --deep: #07142a;           /* bleu nuit des sections */
+  --royal: #0052a6;          /* bleu du logo */
+  --wave: #0170d0;           /* vagues du logo */
+  --accent: #77e0f5;         /* cyan du site actuel */
+  --moon: #f7f2d8;           /* crème de la lune */
+  --text: #eef2f8;
+  --muted: #9aa8bd;
+  --line: rgba(119, 224, 245, .18);
+  --card: rgba(10, 22, 44, .62);
+  --radius: 18px;
+  --display: "Cinzel", Georgia, serif;
+  --label: "Montserrat", system-ui, sans-serif;
+  --body: "Inter", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--night); color: var(--text); font: 400 16px/1.65 var(--body); -webkit-font-smoothing: antialiased; }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(1200px, 100% - 32px); margin-inline: auto; }
+.eyebrow { font: 600 12px/1 var(--label); letter-spacing: .32em; text-transform: uppercase; color: var(--accent); }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: .04em; margin: 0; }
+h2 { font-size: clamp(30px, 4.2vw, 48px); line-height: 1.12; }
+.lead { color: var(--muted); max-width: 620px; }
+
+/* ---------- boutons ---------- */
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 26px; border-radius: 999px; font: 600 13px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; cursor: pointer; border: 1px solid transparent; transition: transform .2s, background .2s, border-color .2s, box-shadow .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: linear-gradient(135deg, var(--wave), var(--royal)); color: #fff; box-shadow: 0 10px 30px rgba(1, 112, 208, .35); }
+.btn-primary:hover { box-shadow: 0 14px 38px rgba(1, 112, 208, .5); }
+.btn-ghost { border-color: rgba(255,255,255,.35); color: #fff; background: rgba(4, 6, 12, .25); backdrop-filter: blur(6px); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.play { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.14); margin: -9px 0 -9px -12px; }
+.play svg { width: 12px; height: 12px; margin-left: 2px; fill: currentColor; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- en-tête ---------- */
+header { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+header.scrolled { background: rgba(4, 6, 12, .78); backdrop-filter: blur(14px); border-color: var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 78px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img { width: 40px; height: 40px; }
+.brand b { font: 600 18px/1 var(--display); letter-spacing: .16em; }
+.brand small { display: block; font: 500 9px/1 var(--label); letter-spacing: .5em; color: var(--muted); margin-top: 5px; }
+.links { display: flex; gap: 30px; font: 500 12px/1 var(--label); letter-spacing: .2em; text-transform: uppercase; }
+.links a { color: #d7deea; padding: 8px 0; border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
+.links a:hover { color: var(--accent); border-color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.lang { display: flex; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; overflow: hidden; }
+.lang button { background: none; border: 0; color: var(--muted); font: 600 12px/1 var(--label); letter-spacing: .12em; padding: 9px 13px; cursor: pointer; }
+.lang button[aria-pressed="true"] { color: var(--accent); background: rgba(119, 224, 245, .08); }
+.nav .btn { padding: 12px 20px; font-size: 11px; }
+
+/* ---------- héros avec le trailer ---------- */
+.hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; }
+.hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ""; position: absolute; inset: 0; background:
+  linear-gradient(90deg, rgba(4,6,12,.92) 0%, rgba(4,6,12,.62) 42%, rgba(4,6,12,.15) 75%),
+  linear-gradient(0deg, var(--night) 0%, rgba(4,6,12,0) 28%),
+  linear-gradient(180deg, rgba(4,6,12,.55) 0%, rgba(4,6,12,0) 22%); }
+.hero-content { position: relative; z-index: 2; padding: 120px 0 90px; }
+.hero h1 { font-size: clamp(46px, 8.6vw, 112px); line-height: .98; font-weight: 600; letter-spacing: .03em; text-shadow: 0 6px 40px rgba(0,0,0,.45); }
+.divider { display: flex; align-items: center; gap: 14px; width: min(460px, 100%); margin: 30px 0 24px; color: var(--accent); }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(119,224,245,0), rgba(119,224,245,.6)); }
+.divider::after { transform: scaleX(-1); }
+.divider i { width: 9px; height: 9px; border: 1.5px solid currentColor; transform: rotate(45deg); }
+.tags { font: 600 13px/1.6 var(--label); letter-spacing: .26em; text-transform: uppercase; color: #dfe6f1; }
+.tags span { color: var(--accent); margin: 0 .15em; }
+.hero p.sub { color: #c4cddb; max-width: 520px; margin: 18px 0 34px; font-size: 17px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-foot { position: absolute; z-index: 2; left: 0; right: 0; bottom: 28px; display: flex; justify-content: space-between; align-items: end; font: 500 11px/1.7 var(--label); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.scroll { display: flex; align-items: center; gap: 12px; }
+.scroll i { width: 1px; height: 42px; background: linear-gradient(var(--accent), transparent); animation: drip 2.2s infinite; }
+@keyframes drip { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* ---------- sections ---------- */
+section { padding: 120px 0; position: relative; }
+.head { display: grid; gap: 18px; margin-bottom: 56px; }
+.head.center { text-align: center; justify-items: center; }
+
+/* bande de chiffres-clés / promesses */
+.promise { padding: 0; margin-top: -1px; }
+.promise .grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(7,20,42,.7), rgba(4,6,12,.4)); }
+.promise .item { padding: 28px 26px; border-left: 1px solid var(--line); }
+.promise .item:first-child { border-left: 0; }
+.promise b { display: block; font: 600 22px/1.2 var(--display); color: var(--moon); margin-bottom: 6px; }
+.promise span { color: var(--muted); font-size: 14px; }
+
+/* services */
+.services .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; transition: transform .25s, border-color .25s, background .25s; }
+.card:hover { transform: translateY(-4px); border-color: rgba(119, 224, 245, .45); background: rgba(12, 30, 60, .75); }
+.card .ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(1,112,208,.35), rgba(0,82,166,.15)); color: var(--accent); margin-bottom: 22px; }
+.card .ico svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { font-size: 19px; margin-bottom: 10px; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* portfolio */
+.work { background: radial-gradient(1100px 500px at 80% 0%, rgba(1,112,208,.14), transparent 70%); }
+.gallery { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 210px; gap: 14px; }
+.shot { position: relative; margin: 0; overflow: hidden; border-radius: 14px; grid-column: span 4; background: var(--deep); }
+.shot.big { grid-column: span 8; grid-row: span 2; }
+.shot.tall { grid-row: span 2; }
+.shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s; filter: saturate(.92); }
+.shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,6,12,.85), rgba(4,6,12,0) 55%); opacity: .75; transition: opacity .3s; }
+.shot figcaption { position: absolute; left: 18px; bottom: 16px; z-index: 2; }
+.shot figcaption b { display: block; font: 600 18px/1.2 var(--display); letter-spacing: .06em; }
+.shot figcaption span { font: 600 10px/1 var(--label); letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+.shot:hover img { transform: scale(1.06); filter: saturate(1.05); }
+.shot:hover::after { opacity: 1; }
+.more { margin-top: 34px; text-align: center; }
+
+/* pourquoi nous */
+.why .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 70px; align-items: center; }
+.why ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
+.why li { display: grid; grid-template-columns: 38px 1fr; gap: 16px; }
+.why li i { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--accent); font: 600 13px/1 var(--label); font-style: normal; }
+.why li b { display: block; font: 600 16px/1.3 var(--label); letter-spacing: .04em; margin-bottom: 4px; }
+.why li span { color: var(--muted); font-size: 15px; }
+.why .visual { position: relative; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--line); }
+.why .visual img { width: 100%; height: 100%; object-fit: cover; }
+.why .visual .badge { position: absolute; left: 20px; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; background: rgba(4,6,12,.72); backdrop-filter: blur(10px); border: 1px solid var(--line); }
+.why .visual .badge img { width: 42px; height: 42px; }
+.why .visual .badge b { font: 600 14px/1.3 var(--label); }
+.why .visual .badge span { display: block; color: var(--muted); font-size: 13px; }
+
+/* étapes */
+.process { background: linear-gradient(180deg, var(--night), var(--deep) 60%, var(--night)); }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: s; }
+.step { position: relative; padding: 30px 24px 26px; border-top: 1px solid var(--line); }
+.step::before { counter-increment: s; content: "0" counter(s); font: 600 44px/1 var(--display); color: rgba(119,224,245,.22); display: block; margin-bottom: 16px; }
+.step::after { content: ""; position: absolute; top: -4px; left: 24px; width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
+.step h3 { font-size: 18px; margin-bottom: 10px; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* appel final */
+.cta { padding: 0 0 120px; }
+.cta .box { position: relative; overflow: hidden; border-radius: 26px; padding: 80px 40px; text-align: center; border: 1px solid var(--line); background: linear-gradient(135deg, #0a3f86, #062452 55%, #04112a); }
+.cta .box::before { content: ""; position: absolute; width: 420px; height: 420px; right: -110px; top: -140px; border-radius: 50%; box-shadow: -60px 40px 0 0 var(--moon); opacity: .12; }
+.cta .box > * { position: relative; }
+.cta h2 { margin: 16px 0 14px; }
+.cta p { color: #c7d3e6; max-width: 560px; margin: 0 auto 34px; }
+.cta .row { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+footer { border-top: 1px solid var(--line); padding: 46px 0; color: var(--muted); font-size: 14px; }
+footer .row { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+footer nav { display: flex; gap: 24px; flex-wrap: wrap; }
+footer a:hover { color: var(--accent); }
+
+/* ---------- lecteur du trailer ---------- */
+dialog.player { width: min(1180px, 94vw); padding: 0; border: 1px solid var(--line); border-radius: 18px; background: #000; color: #fff; overflow: hidden; }
+dialog.player::backdrop { background: rgba(2, 4, 9, .86); backdrop-filter: blur(6px); }
+dialog.player video { width: 100%; aspect-ratio: 2 / 1; background: #000; }
+dialog.player .close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(0,0,0,.55); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
+
+/* apparition au défilement */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1020px) {
+  .links { display: none; }
+  .services .grid, .steps, .promise .grid { grid-template-columns: repeat(2, 1fr); }
+  .promise .item:nth-child(3) { border-left: 0; }
+  .promise .item:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .why .grid { grid-template-columns: 1fr; gap: 48px; }
+  .why .visual { aspect-ratio: 16 / 10; }
+  .gallery { grid-template-columns: repeat(6, 1fr); }
+  .shot, .shot.tall { grid-column: span 3; grid-row: span 1; }
+  .shot.big { grid-column: span 6; grid-row: span 2; }
+}
+@media (max-width: 640px) {
+  section { padding: 84px 0; }
+  .nav { height: 66px; }
+  .nav .btn, .brand small { display: none; }
+  .services .grid, .steps, .promise .grid { grid-template-columns: 1fr; }
+  .promise .item { border-left: 0 !important; border-top: 1px solid var(--line); }
+  .promise .item:first-child { border-top: 0; }
+  .gallery { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+  .shot, .shot.big, .shot.tall { grid-column: span 1; grid-row: span 1; }
+  .hero-foot .scroll { display: none; }
+  .hero::after { background: linear-gradient(0deg, var(--night) 0%, rgba(4,6,12,.72) 45%, rgba(4,6,12,.45) 100%); }
+  .cta .box { padding: 56px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll i { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Lusciana Studios">
+      <img src="assets/logo.png" alt="">
+      <div><b>LUSCIANA</b><small>STUDIOS</small></div>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#work" data-i18n="nav.work">Portfolio</a>
+      <a href="#why" data-i18n="nav.studio">Studio</a>
+      <a href="#process" data-i18n="nav.process">Process</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      </div>
+      <a class="btn btn-primary" href="https://lusciana.fr/devis" data-i18n="cta.quote">Get a quote</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HÉROS : le trailer tourne en fond (sans le son), le bouton ouvre la version complète avec le son -->
+  <section class="hero" aria-label="Lusciana Studios trailer">
+    <img class="poster" src="assets/hero-first.jpg" alt="">
+    <video id="heroVideo" src="assets/trailer-loop.mp4" poster="assets/hero-first.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="wrap hero-content">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Minecraft build studio</p>
+      <h1>Lusciana<br>Studios</h1>
+      <div class="divider" aria-hidden="true"><i></i></div>
+      <p class="tags" data-i18n-html="hero.tags">Maps <span>•</span> Spawns <span>•</span> Lobbies <span>•</span> Terraforming <span>•</span> Organics</p>
+      <p class="sub" data-i18n="hero.sub">One contact, a full team of builders. We design and build the worlds your players will remember — on time, checked, ready to play.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" type="button" id="openTrailer">
+          <span class="play"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg></span>
+          <span data-i18n="cta.trailer">Watch the trailer</span>
+        </button>
+        <a class="btn btn-ghost" href="#work" data-i18n="cta.work">Explore our work</a>
+      </div>
+    </div>
+    <div class="wrap hero-foot">
+      <span data-i18n-html="hero.foot">Lusciana Studios — Minecraft worlds<br>for servers, creators and the Marketplace</span>
+      <span class="scroll"><span data-i18n="hero.scroll">Scroll</span><i></i></span>
+    </div>
+  </section>
+
+  <!-- PROMESSES -->
+  <section class="promise" aria-label="Why it works">
+    <div class="wrap grid reveal">
+      <div class="item"><b data-i18n="p1.t">One contact</b><span data-i18n="p1.d">One brief, one invoice, one deadline.</span></div>
+      <div class="item"><b data-i18n="p2.t">A full team</b><span data-i18n="p2.d">Builders and terraformers working in parallel.</span></div>
+      <div class="item"><b data-i18n="p3.t">Live follow-up</b><span data-i18n="p3.d">Watch your build grow on our private server.</span></div>
+      <div class="item"><b data-i18n="p4.t">Quality checked</b><span data-i18n="p4.d">Internal review and fixes before delivery.</span></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow" data-i18n="s.eyebrow">What we build</p>
+        <h2 data-i18n="s.title">Worlds made to be played</h2>
+      </div>
+      <div class="grid">
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></div>
+          <h3 data-i18n="s1.t">Maps</h3>
+          <p data-i18n="s1.d">Adventure, survival and PvP maps, from the first sketch to the last block.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
+          <h3 data-i18n="s2.t">Spawns &amp; lobbies</h3>
+          <p data-i18n="s2.d">The first thing your players see. Clear paths, a strong landmark, a lasting first impression.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M2 20l7-11 4 6 3-4 6 9z"/><circle cx="17" cy="6" r="2"/></svg></div>
+          <h3 data-i18n="s3.t">Terraforming</h3>
+          <p data-i18n="s3.d">Mountains, islands, caves and coastlines shaped to fit your gameplay.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22V11"/><path d="M12 11c-4 0-7-3-7-7 4 0 7 3 7 7zM12 14c3 0 6-2 6-6-3 0-6 2-6 6z"/></svg></div>
+          <h3 data-i18n="s4.t">Organics</h3>
+          <p data-i18n="s4.d">Custom trees, creatures and statues that bring a world to life.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow" data-i18n="w.eyebrow">Selected work</p>
+        <h2 data-i18n="w.title">From floating cities to hidden kingdoms</h2>
+      </div>
+      <div class="gallery">
+        <figure class="shot big reveal"><img src="assets/renders/c-Caerwynn.webp" alt="Caerwynn, floating fantasy city" loading="lazy"><figcaption><span>Fantasy city</span><b>Caerwynn</b></figcaption></figure>
+        <figure class="shot tall reveal"><img src="assets/renders/gothicPalace.webp" alt="Gothic palace among cherry trees" loading="lazy"><figcaption><span>Palace</span><b>Gothic Palace</b></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/renders/WANO.webp" alt="Wano, Japanese city" loading="lazy"><figcaption><span>City</span><b>Wano</b></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/renders/Sombrosia.webp" alt="Sombrosia, underground city" loading="lazy"><figcaption><span>Underground</span><b>Sombrosia</b></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/renders/c-hwPorco.webp" alt="Island villa with seaplanes" loading="lazy"><figcaption><span>Island</span><b>Porco</b></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/renders/c-NOX.webp" alt="NOX, mountain kingdom" loading="lazy"><figcaption><span>Kingdom</span><b>NOX</b></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/renders/c-Sanctuary2.webp" alt="Forest sanctuary" loading="lazy"><figcaption><span>Temple</span><b>Sanctuary</b></figcaption></figure>
+        <figure class="shot reveal"><img src="assets/renders/Ved.webp" alt="Ved, coastal village" loading="lazy"><figcaption><span>Village</span><b>Ved</b></figcaption></figure>
+      </div>
+      <div class="more reveal"><button class="btn btn-ghost" type="button" data-open-trailer data-i18n="cta.trailer2">See it in motion — watch the trailer</button></div>
+    </div>
+  </section>
+
+  <!-- POURQUOI LUSCIANA -->
+  <section class="why" id="why">
+    <div class="wrap grid">
+      <div>
+        <div class="head reveal">
+          <p class="eyebrow" data-i18n="y.eyebrow">The studio</p>
+          <h2 data-i18n="y.title">A team, not a freelancer</h2>
+          <p class="lead" data-i18n="y.lead">Instead of hiring builders one by one, you work with a complete team and a single point of contact.</p>
+        </div>
+        <ul>
+          <li class="reveal"><i>01</i><div><b data-i18n="y1.t">Faster big projects</b><span data-i18n="y1.d">Several builders and terraformers on your map at the same time.</span></div></li>
+          <li class="reveal"><i>02</i><div><b data-i18n="y2.t">Deadlines kept</b><span data-i18n="y2.d">If a builder is unavailable, another one from the team takes over.</span></div></li>
+          <li class="reveal"><i>03</i><div><b data-i18n="y3.t">Our own quality control</b><span data-i18n="y3.d">We review and fix everything before you see the final result.</span></div></li>
+          <li class="reveal"><i>04</i><div><b data-i18n="y4.t">Trusted by studios</b><span data-i18n="y4.d">We already deliver Marketplace content as a subcontractor, with NDA when needed.</span></div></li>
+        </ul>
+      </div>
+      <div class="visual reveal">
+        <img src="assets/poster.jpg" alt="Giant tree from the Lusciana Studios trailer" loading="lazy">
+        <div class="badge"><img src="assets/logo.png" alt=""><div><b>luna.lusciana.fr</b><span data-i18n="y.badge">Follow your build live on our private server</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÉROULÉ D'UNE COMMANDE -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="head center reveal">
+        <p class="eyebrow" data-i18n="pr.eyebrow">How it works</p>
+        <h2 data-i18n="pr.title">From your idea to your server</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><h3 data-i18n="pr1.t">Your brief</h3><p data-i18n="pr1.d">Tell us about your project on Discord or through our quote form: style, size, version, references.</p></div>
+        <div class="step reveal"><h3 data-i18n="pr2.t">Your quote</h3><p data-i18n="pr2.d">A clear price and deadline. 50% deposit to start, the rest on delivery.</p></div>
+        <div class="step reveal"><h3 data-i18n="pr3.t">The build</h3><p data-i18n="pr3.d">Live access to our private server and regular screenshots. Give feedback at any time.</p></div>
+        <div class="step reveal"><h3 data-i18n="pr4.t">Delivery</h3><p data-i18n="pr4.d">World or schematic, free installation if needed, minor fixes after delivery included.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPEL FINAL -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <div class="box reveal">
+        <p class="eyebrow" data-i18n="c.eyebrow">Your next world</p>
+        <h2 data-i18n="c.title">Let's build it together</h2>
+        <p data-i18n="c.d">Send us your idea, we answer fast with questions, a price and a deadline.</p>
+        <div class="row">
+          <a class="btn btn-primary" href="https://lusciana.fr/devis" data-i18n="cta.quote2">Request a quote</a>
+          <a class="btn btn-ghost" href="https://discord.gg/lusciana" target="_blank" rel="noopener" data-i18n="cta.discord">Join our Discord</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <a class="brand" href="#top"><img src="assets/logo.png" alt=""><div><b>LUSCIANA</b><small>STUDIOS</small></div></a>
+    <nav aria-label="Footer">
+      <a href="#work" data-i18n="nav.work">Portfolio</a>
+      <a href="https://lusciana.fr/devis" data-i18n="cta.quote">Get a quote</a>
+      <a href="https://discord.gg/lusciana" target="_blank" rel="noopener">Discord</a>
+      <a href="mailto:luscianabuilds@gmail.com">luscianabuilds@gmail.com</a>
+    </nav>
+    <span>© <span id="year"></span> Lusciana Studios</span>
+  </div>
+</footer>
+
+<!-- Lecteur du trailer complet, avec le son -->
+<dialog class="player" id="player" aria-label="Lusciana Studios trailer">
+  <button class="close" type="button" id="closeTrailer" aria-label="Close">×</button>
+  <video id="fullVideo" src="assets/trailer.mp4" poster="assets/poster.jpg" controls playsinline preload="none"></video>
+</dialog>
+
+<script>
+(() => {
+  /* ---------- traductions FR / EN ---------- */
+  const fr = {
+    "nav.services": "Services", "nav.work": "Portfolio", "nav.studio": "Studio", "nav.process": "Méthode", "nav.contact": "Contact",
+    "cta.quote": "Demander un devis", "cta.quote2": "Demander un devis", "cta.trailer": "Voir le trailer", "cta.trailer2": "Tout voir en mouvement — le trailer",
+    "cta.work": "Voir nos réalisations", "cta.discord": "Rejoindre le Discord",
+    "hero.eyebrow": "Studio de build Minecraft",
+    "hero.tags": "Maps <span>•</span> Spawns <span>•</span> Lobbies <span>•</span> Terraforming <span>•</span> Organiques",
+    "hero.sub": "Un seul interlocuteur, toute une équipe de builders. Nous concevons et construisons les mondes dont vos joueurs se souviendront — dans les délais, vérifiés, prêts à jouer.",
+    "hero.foot": "Lusciana Studios — des mondes Minecraft<br>pour les serveurs, les créateurs et le Marketplace", "hero.scroll": "Défiler",
+    "p1.t": "Un seul contact", "p1.d": "Un brief, une facture, une deadline.",
+    "p2.t": "Toute une équipe", "p2.d": "Builders et terraformeurs en parallèle.",
+    "p3.t": "Suivi en direct", "p3.d": "Votre build avance sous vos yeux sur notre serveur privé.",
+    "p4.t": "Qualité vérifiée", "p4.d": "Contrôle interne et retouches avant livraison.",
+    "s.eyebrow": "Ce que nous construisons", "s.title": "Des mondes faits pour être joués",
+    "s1.t": "Maps", "s1.d": "Maps aventure, survie et PvP, du premier croquis au dernier bloc.",
+    "s2.t": "Spawns & lobbies", "s2.d": "La première chose que voient vos joueurs. Des chemins clairs, un point fort, une première impression qui marque.",
+    "s3.t": "Terraforming", "s3.d": "Montagnes, îles, grottes et côtes façonnées pour votre gameplay.",
+    "s4.t": "Organiques", "s4.d": "Arbres, créatures et statues sur mesure qui donnent vie à un monde.",
+    "w.eyebrow": "Nos réalisations", "w.title": "Des cités flottantes aux royaumes cachés",
+    "y.eyebrow": "Le studio", "y.title": "Une équipe, pas un freelance",
+    "y.lead": "Plutôt que de recruter des builders un par un, vous travaillez avec une équipe complète et un seul interlocuteur.",
+    "y1.t": "Les gros projets avancent plus vite", "y1.d": "Plusieurs builders et terraformeurs sur votre map en même temps.",
+    "y2.t": "Des deadlines tenues", "y2.d": "Si un builder est indisponible, un autre de l'équipe prend le relais.",
+    "y3.t": "Notre propre contrôle qualité", "y3.d": "Nous relisons et corrigeons tout avant de vous montrer le résultat.",
+    "y4.t": "La confiance des studios", "y4.d": "Nous livrons déjà du contenu Marketplace en sous-traitance, avec NDA si besoin.",
+    "y.badge": "Suivez votre build en direct sur notre serveur privé",
+    "pr.eyebrow": "Comment ça marche", "pr.title": "De votre idée à votre serveur",
+    "pr1.t": "Votre brief", "pr1.d": "Présentez votre projet sur Discord ou via notre formulaire de devis : style, taille, version, références.",
+    "pr2.t": "Votre devis", "pr2.d": "Un prix et une deadline clairs. 50 % d'acompte pour démarrer, le reste à la livraison.",
+    "pr3.t": "La construction", "pr3.d": "Accès en direct à notre serveur privé et captures régulières. Vos retours à tout moment.",
+    "pr4.t": "La livraison", "pr4.d": "Monde ou schematic, installation offerte si besoin, petites retouches après livraison incluses.",
+    "c.eyebrow": "Votre prochain monde", "c.title": "Construisons-le ensemble",
+    "c.d": "Envoyez-nous votre idée, nous répondons vite avec nos questions, un prix et une deadline."
+  };
+  const en = {};
+  document.querySelectorAll("[data-i18n]").forEach(el => en[el.dataset.i18n] = el.textContent);
+  document.querySelectorAll("[data-i18n-html]").forEach(el => en[el.dataset.i18nHtml] = el.innerHTML);
+
+  function setLang(lang) {
+    const dict = lang === "fr" ? fr : en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => { const v = dict[el.dataset.i18n]; if (v) el.textContent = v; });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = dict[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
+    document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    try { localStorage.setItem("lusciana-lang", lang); } catch (e) {}
+  }
+  document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  let saved = null;
+  try { saved = localStorage.getItem("lusciana-lang"); } catch (e) {}
+  setLang(saved || (navigator.language || "en").toLowerCase().startsWith("fr") ? (saved || "fr") : "en");
+
+  /* ---------- en-tête au défilement ---------- */
+  const header = document.querySelector("header");
+  const onScroll = () => header.classList.toggle("scrolled", scrollY > 30);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* ---------- vidéo de fond : pas d'autoplay si l'utilisateur réduit les animations ---------- */
+  const hero = document.getElementById("heroVideo");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { hero.removeAttribute("autoplay"); hero.pause(); }
+
+  /* ---------- lecteur du trailer ---------- */
+  const dlg = document.getElementById("player");
+  const full = document.getElementById("fullVideo");
+  const open = () => { hero.pause(); dlg.showModal(); full.currentTime = 0; full.play().catch(() => {}); };
+  const close = () => dlg.close();
+  document.getElementById("openTrailer").addEventListener("click", open);
+  document.querySelectorAll("[data-open-trailer]").forEach(b => b.addEventListener("click", open));
+  document.getElementById("closeTrailer").addEventListener("click", close);
+  dlg.addEventListener("click", e => { if (e.target === dlg) close(); });
+  dlg.addEventListener("close", () => { full.pause(); if (!matchMedia("(prefers-reduced-motion: reduce)").matches) hero.play().catch(() => {}); });
+
+  /* ---------- apparition des blocs ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
