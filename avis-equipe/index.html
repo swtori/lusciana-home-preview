@@ -555,10 +555,13 @@
                 </div>
             </div>
 
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
             <p class="error-msg" id="error-msg" data-fr="Il manque des réponses (en rouge)." data-en="Some answers are missing (in red)."></p>
+            <p class="error-msg" id="send-error" data-fr="L'envoi a échoué. Réessaie dans un instant." data-en="Sending failed. Please try again in a moment."></p>
 
             <div class="submit-row">
-                <button type="submit" class="apply-button"><i class="fa-solid fa-paper-plane"></i><span data-fr="Envoyer mes réponses" data-en="Send my answers"></span></button>
+                <button type="submit" class="apply-button" id="submit-btn"><i class="fa-solid fa-paper-plane"></i><span data-fr="Envoyer mes réponses" data-en="Send my answers"></span></button>
             </div>
         </form>
 
@@ -567,20 +570,18 @@
             <h2 data-fr="Merci !" data-en="Thank you!"></h2>
             <p data-fr="Tes réponses ont bien été prises en compte. Un résumé des résultats et les actions décidées seront partagés avec l'équipe."
                data-en="Your answers have been recorded. A summary of the results and the actions decided will be shared with the team."></p>
-            <div class="actions">
-                <button type="button" class="apply-button secondary" id="download-json"><i class="fa-solid fa-download"></i><span data-fr="Télécharger les réponses (test local)" data-en="Download answers (local test)"></span></button>
-                <button type="button" class="apply-button" id="restart"><i class="fa-solid fa-rotate-left"></i><span data-fr="Recommencer" data-en="Start over"></span></button>
-            </div>
         </div>
     </main>
 
     <footer>© LuscianaBT</footer>
 
     <script>
-        // Version locale : rien n'est envoyé. Les réponses sont gardées dans la page
-        // et peuvent être téléchargées en JSON pour vérifier le format.
+        // Réponses enregistrées dans Mongo (team_feedback) via l'API admin.lusciana.fr.
+        // Résultats : https://admin.lusciana.fr/pages/avis-equipe.html
+        const API_URL = location.hostname === 'admin.lusciana.fr'
+            ? '/api/team-feedback'
+            : 'https://admin.lusciana.fr/api/team-feedback';
         let lang = 'fr';
-        let lastAnswers = null;
 
         // Échelles de notes
         document.querySelectorAll('[data-scale]').forEach(el => {
@@ -648,11 +649,13 @@
             updateProgress();
         });
 
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', async e => {
             e.preventDefault();
             const missing = requiredBlocks.filter(b => !isAnswered(b));
             requiredBlocks.forEach(b => b.classList.toggle('invalid', missing.includes(b)));
             const err = document.getElementById('error-msg');
+            const sendErr = document.getElementById('send-error');
+            sendErr.style.display = 'none';
             if (missing.length) {
                 err.style.display = 'block';
                 missing[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -660,38 +663,37 @@
             }
             err.style.display = 'none';
 
-            const data = new FormData(form);
-            const answers = { langue: lang, date: new Date().toISOString() };
-            for (const [key, value] of data.entries()) {
-                if (key === 'envies') (answers.envies ||= []).push(value);
-                else if (String(value).trim() !== '') answers[key] = /^\d+$/.test(value) && form.querySelector(`[data-scale="${key}"]`) ? Number(value) : String(value).trim();
+            const answers = { langue: lang, envies: [] };
+            for (const [key, value] of new FormData(form).entries()) {
+                if (key === 'envies') answers.envies.push(value);
+                else if (form.querySelector(`[data-scale="${key}"]`)) answers[key] = Number(value);
+                else answers[key] = String(value).trim();
             }
-            lastAnswers = answers;
-            console.log('Réponses :', answers);
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(answers)
+                });
+                if (!res.ok) {
+                    const data = await res.json().catch(() => ({}));
+                    throw new Error(data.message || ('HTTP ' + res.status));
+                }
+            } catch (error) {
+                console.error(error);
+                sendErr.style.display = 'block';
+                btn.disabled = false;
+                btn.style.opacity = '';
+                return;
+            }
 
             form.style.display = 'none';
             document.querySelector('.progress').style.display = 'none';
             document.getElementById('thanks').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        document.getElementById('download-json').addEventListener('click', () => {
-            if (!lastAnswers) return;
-            const blob = new Blob([JSON.stringify(lastAnswers, null, 2)], { type: 'application/json' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'avis-equipe-reponses.json';
-            a.click();
-            URL.revokeObjectURL(a.href);
-        });
-
-        document.getElementById('restart').addEventListener('click', () => {
-            form.reset();
-            requiredBlocks.forEach(b => b.classList.remove('invalid'));
-            updateProgress();
-            form.style.display = '';
-            document.querySelector('.progress').style.display = '';
-            document.getElementById('thanks').style.display = 'none';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
