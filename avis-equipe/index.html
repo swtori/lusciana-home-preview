@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>LuscianaBT | Avis de l'équipe</title>
+    <link rel="icon" type="image/png" href="https://lusciana.fr/favicon_io/favicon-32x32.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #1a1a1a;
+            --accent-color: #225071;
+            --accent-light: #77E0F5;
+            --hover-color: #4a9bc7;
+            --text-color: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 0%, rgba(119, 224, 245, 0.10), transparent 55%),
+                radial-gradient(ellipse at 90% 100%, rgba(34, 80, 113, 0.25), transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .top-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.95);
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .top-logo img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(119, 224, 245, 0.18));
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .lang-switch button {
+            background: transparent;
+            border: 1px solid rgba(119, 224, 245, 0.25);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-switch button.active,
+        .lang-switch button:hover {
+            border-color: var(--accent-light);
+            color: var(--accent-light);
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #FFFFFF, var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.25rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.82rem;
+            color: var(--accent-light);
+            background: rgba(119, 224, 245, 0.08);
+            border: 1px solid rgba(119, 224, 245, 0.2);
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+        }
+
+        .progress {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+            transition: width 0.3s;
+        }
+
+        .section {
+            background: linear-gradient(145deg, rgba(119, 224, 245, 0.06), rgba(34, 80, 113, 0.08));
+            border: 1px solid rgba(119, 224, 245, 0.2);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            color: var(--accent-light);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .q {
+            padding: 1.1rem 0;
+            border-top: 1px solid rgba(119, 224, 245, 0.1);
+        }
+
+        .q:first-of-type { border-top: none; padding-top: 0; }
+
+        .q-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .q-label .num {
+            color: var(--accent-light);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-right: 0.4rem;
+        }
+
+        .q-label .req { color: #ff8a9a; margin-left: 0.2rem; }
+
+        .q-help {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 0.75rem;
+        }
+
+        .scale {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .scale label {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .scale input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scale span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 44px;
+            padding: 0 0.6rem;
+            border-radius: 8px;
+            border: 1px solid rgba(119, 224, 245, 0.25);
+            background: rgba(0, 0, 0, 0.45);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            transition: all 0.25s;
+        }
+
+        .scale label:hover span { border-color: var(--accent-light); }
+
+        .scale input:checked + span {
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-light));
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 0 18px rgba(119, 224, 245, 0.25);
+        }
+
+        .scale input:focus-visible + span { outline: 2px solid var(--accent-light); outline-offset: 2px; }
+
+        .scale-legend {
+            display: flex;
+            justify-content: space-between;
+            max-width: 260px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 0.75rem;
+        }
+
+        .scale-legend.wide { max-width: 560px; }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .choices label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 0.8rem;
+            border: 1px solid rgba(119, 224, 245, 0.18);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+            font-size: 0.92rem;
+            transition: border-color 0.25s;
+        }
+
+        .choices label:hover { border-color: var(--accent-light); }
+
+        .choices input { accent-color: var(--accent-light); width: 16px; height: 16px; }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid rgba(119, 224, 245, 0.25);
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        textarea { min-height: 70px; resize: vertical; }
+
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-light);
+            box-shadow: 0 0 0 3px rgba(119, 224, 245, 0.12);
+        }
+
+        ::placeholder { color: rgba(255, 255, 255, 0.35); }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .q.invalid .q-label { color: #ff8a9a; }
+
+        .error-msg {
+            display: none;
+            color: #ff8a9a;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .submit-row { text-align: center; margin-top: 2rem; }
+
+        .apply-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-light));
+            color: #fff;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .apply-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(119, 224, 245, 0.25);
+        }
+
+        .apply-button.secondary {
+            background: transparent;
+            border: 1px solid rgba(119, 224, 245, 0.35);
+            color: var(--accent-light);
+        }
+
+        .thanks {
+            display: none;
+            text-align: center;
+        }
+
+        .thanks i {
+            font-size: 3rem;
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+        }
+
+        .thanks h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .thanks p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .thanks .actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.8rem;
+            padding-bottom: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .top-bar { padding: 1rem 1.25rem; }
+            .container { padding: 1rem 1rem 4rem; }
+            .section { padding: 1.25rem; }
+            .two-col { grid-template-columns: 1fr; }
+            .scale span { min-width: 40px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <a class="top-logo" href="https://lusciana.fr/">
+            <img src="https://lusciana.fr/imgLogoLusciana.png" alt="Lusciana">
+            LuscianaBT
+        </a>
+        <div class="lang-switch">
+            <button type="button" data-lang="fr" class="active">FR</button>
+            <button type="button" data-lang="en">EN</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1 data-fr="Ton avis sur l'équipe" data-en="Your feedback on the team"></h1>
+            <p data-fr="Ce questionnaire nous aide à améliorer la vie dans l'équipe Lusciana. Réponds franchement : il n'y a pas de bonne ou de mauvaise réponse."
+               data-en="This survey helps us improve life in the Lusciana team. Be honest: there are no right or wrong answers."></p>
+            <div class="badges">
+                <span class="badge"><i class="fa-solid fa-user-secret"></i><span data-fr="Anonyme" data-en="Anonymous"></span></span>
+                <span class="badge"><i class="fa-regular fa-clock"></i><span data-fr="5 minutes" data-en="5 minutes"></span></span>
+                <span class="badge"><i class="fa-solid fa-list-check"></i><span data-fr="16 questions" data-en="16 questions"></span></span>
+            </div>
+        </section>
+
+        <div class="progress"><span id="progress-bar"></span></div>
+
+        <form id="survey" novalidate>
+            <!-- 1. Ambiance et vie d'équipe -->
+            <div class="section">
+                <h2><i class="fa-solid fa-users"></i><span data-fr="Ambiance et vie d'équipe" data-en="Atmosphere and team life"></span></h2>
+
+                <div class="q" data-required="ambiance">
+                    <span class="q-label"><span class="num">1.</span><span data-fr="L'ambiance générale dans l'équipe" data-en="The general atmosphere in the team"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="ambiance" data-max="5"></div>
+                    <textarea name="ambiance_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="social">
+                    <span class="q-label"><span class="num">2.</span><span data-fr="Le côté social : liens avec les autres, entraide" data-en="The social side: bonds with others, mutual help"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="social" data-max="5"></div>
+                    <textarea name="social_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="vie_equipe">
+                    <span class="q-label"><span class="num">3.</span><span data-fr="La vie dans l'équipe : organisation, règles, reconnaissance" data-en="Life in the team: organisation, rules, recognition"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="vie_equipe" data-max="5"></div>
+                    <textarea name="vie_equipe_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+            </div>
+
+            <!-- 2. Commissions et rémunération -->
+            <div class="section">
+                <h2><i class="fa-solid fa-coins"></i><span data-fr="Commissions et rémunération" data-en="Commissions and pay"></span></h2>
+
+                <div class="q" data-required="volume_commissions">
+                    <span class="q-label"><span class="num">4.</span><span data-fr="As-tu assez de commissions ?" data-en="Do you get enough commissions?"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="volume_commissions" data-max="5"></div>
+                    <textarea name="volume_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="disponibilite">
+                    <span class="q-label"><span class="num">5.</span><span data-fr="Combien d'heures par semaine peux-tu consacrer à Lusciana ?" data-en="How many hours per week can you give to Lusciana?"></span><span class="req">*</span></span>
+                    <div class="choices" data-radio="disponibilite" data-options="lt5|5-10|10-20|gt20"
+                         data-labels-fr="Moins de 5 h|5 à 10 h|10 à 20 h|Plus de 20 h"
+                         data-labels-en="Less than 5 h|5 to 10 h|10 to 20 h|More than 20 h"></div>
+                </div>
+
+                <div class="q" data-required="charge">
+                    <span class="q-label"><span class="num">6.</span><span data-fr="Comment ressens-tu ta charge de travail ?" data-en="How do you feel about your workload?"></span><span class="req">*</span></span>
+                    <div class="choices" data-radio="charge" data-options="pas_assez|bien|trop"
+                         data-labels-fr="Pas assez de travail|C'est bien comme ça|Trop de travail"
+                         data-labels-en="Not enough work|It's just right|Too much work"></div>
+                </div>
+
+                <div class="q" data-required="prix_clients">
+                    <span class="q-label"><span class="num">7.</span><span data-fr="Les prix demandés aux clients te semblent-ils justes ?" data-en="Do the prices charged to clients seem fair to you?"></span><span class="req">*</span></span>
+                    <p class="q-help" data-fr="1 = beaucoup trop bas, 5 = bien placés" data-en="1 = far too low, 5 = well set"></p>
+                    <div class="scale" data-scale="prix_clients" data-max="5" data-nolegend></div>
+                </div>
+
+                <div class="q" data-required="part_builder">
+                    <span class="q-label"><span class="num">8.</span><span data-fr="Ta part sur les commissions te convient-elle ?" data-en="Are you happy with your share of the commissions?"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="part_builder" data-max="5"></div>
+                    <textarea name="prix_commentaire" data-ph-fr="Un commentaire sur les prix ou ta part ? (facultatif)" data-ph-en="Any comment on prices or your share? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="delai_paiement">
+                    <span class="q-label"><span class="num">9.</span><span data-fr="Le délai pour être payé après une commission" data-en="How long it takes to get paid after a commission"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="delai_paiement" data-max="5"></div>
+                    <textarea name="paiement_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+            </div>
+
+            <!-- 3. Travail au quotidien -->
+            <div class="section">
+                <h2><i class="fa-solid fa-hammer"></i><span data-fr="Travail au quotidien" data-en="Day-to-day work"></span></h2>
+
+                <div class="q" data-required="briefs">
+                    <span class="q-label"><span class="num">10.</span><span data-fr="La clarté des briefs, des specs et du claim des commissions" data-en="How clear the briefs, specs and commission claims are"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="briefs" data-max="5"></div>
+                    <textarea name="briefs_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="communication">
+                    <span class="q-label"><span class="num">11.</span><span data-fr="La communication avec les managers et les clients" data-en="Communication with managers and clients"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="communication" data-max="5"></div>
+                    <textarea name="communication_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="outils">
+                    <span class="q-label"><span class="num">12.</span><span data-fr="Les outils : luna.lusciana.fr, le bot, Axiom / WorldEdit, les schématiques" data-en="The tools: luna.lusciana.fr, the bot, Axiom / WorldEdit, schematics"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="outils" data-max="5"></div>
+                    <textarea name="outils_commentaire" data-ph-fr="Un outil qui manque ou qui pose problème ? (facultatif)" data-ph-en="A missing or problematic tool? (optional)"></textarea>
+                </div>
+
+                <div class="q" data-required="progression">
+                    <span class="q-label"><span class="num">13.</span><span data-fr="Ta progression : nouveaux styles, plus de responsabilités" data-en="Your progression: new styles, more responsibilities"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="progression" data-max="5"></div>
+                    <textarea name="progression_commentaire" data-ph-fr="Un commentaire ? (facultatif)" data-ph-en="Any comment? (optional)"></textarea>
+                </div>
+            </div>
+
+            <!-- 4. S'impliquer -->
+            <div class="section">
+                <h2><i class="fa-solid fa-hand-sparkles"></i><span data-fr="S'impliquer" data-en="Getting involved"></span></h2>
+
+                <div class="q">
+                    <span class="q-label"><span class="num">14.</span><span data-fr="Aimerais-tu faire autre chose dans l'équipe ?" data-en="Would you like to do something else in the team?"></span></span>
+                    <p class="q-help" data-fr="Plusieurs choix possibles" data-en="Several choices allowed"></p>
+                    <div class="choices" data-checkbox="envies" data-options="recrutement|tickets|reseaux|renders|terraforming|organics|interieurs|rien"
+                         data-labels-fr="Recrutement|Gestion des tickets|Réseaux sociaux|Renders|Terraforming|Organics|Intérieurs|Rien pour l'instant"
+                         data-labels-en="Recruitment|Ticket management|Social media|Renders|Terraforming|Organics|Interiors|Nothing for now"></div>
+                    <input type="text" name="envies_autre" style="margin-top:0.6rem" data-ph-fr="Autre chose ? (facultatif)" data-ph-en="Something else? (optional)">
+                </div>
+            </div>
+
+            <!-- 5. Bilan -->
+            <div class="section">
+                <h2><i class="fa-solid fa-star"></i><span data-fr="Bilan" data-en="Wrap-up"></span></h2>
+
+                <div class="q" data-required="recommandation">
+                    <span class="q-label"><span class="num">15.</span><span data-fr="Recommanderais-tu Lusciana à un ami builder ?" data-en="Would you recommend Lusciana to a builder friend?"></span><span class="req">*</span></span>
+                    <div class="scale" data-scale="recommandation" data-min="0" data-max="10"></div>
+                    <div class="scale-legend wide"><span data-fr="Pas du tout" data-en="Not at all"></span><span data-fr="Sans hésiter" data-en="Without hesitation"></span></div>
+                </div>
+
+                <div class="q">
+                    <span class="q-label"><span class="num">16.</span><span data-fr="Une chose à garder, une chose à changer" data-en="One thing to keep, one thing to change"></span></span>
+                    <div class="two-col">
+                        <textarea name="a_garder" data-ph-fr="À garder…" data-ph-en="To keep…"></textarea>
+                        <textarea name="a_changer" data-ph-fr="À changer…" data-ph-en="To change…"></textarea>
+                    </div>
+                </div>
+
+                <div class="q">
+                    <span class="q-label"><span data-fr="Ton pseudo (facultatif)" data-en="Your username (optional)"></span></span>
+                    <p class="q-help" data-fr="Laisse vide pour rester anonyme." data-en="Leave empty to stay anonymous."></p>
+                    <input type="text" name="pseudo" maxlength="40" data-ph-fr="Pseudo" data-ph-en="Username">
+                </div>
+            </div>
+
+            <p class="error-msg" id="error-msg" data-fr="Il manque des réponses (en rouge)." data-en="Some answers are missing (in red)."></p>
+
+            <div class="submit-row">
+                <button type="submit" class="apply-button"><i class="fa-solid fa-paper-plane"></i><span data-fr="Envoyer mes réponses" data-en="Send my answers"></span></button>
+            </div>
+        </form>
+
+        <div class="section thanks" id="thanks">
+            <i class="fa-solid fa-circle-check"></i>
+            <h2 data-fr="Merci !" data-en="Thank you!"></h2>
+            <p data-fr="Tes réponses ont bien été prises en compte. Un résumé des résultats et les actions décidées seront partagés avec l'équipe."
+               data-en="Your answers have been recorded. A summary of the results and the actions decided will be shared with the team."></p>
+            <div class="actions">
+                <button type="button" class="apply-button secondary" id="download-json"><i class="fa-solid fa-download"></i><span data-fr="Télécharger les réponses (test local)" data-en="Download answers (local test)"></span></button>
+                <button type="button" class="apply-button" id="restart"><i class="fa-solid fa-rotate-left"></i><span data-fr="Recommencer" data-en="Start over"></span></button>
+            </div>
+        </div>
+    </main>
+
+    <footer>© LuscianaBT</footer>
+
+    <script>
+        // Version locale : rien n'est envoyé. Les réponses sont gardées dans la page
+        // et peuvent être téléchargées en JSON pour vérifier le format.
+        let lang = 'fr';
+        let lastAnswers = null;
+
+        // Échelles de notes
+        document.querySelectorAll('[data-scale]').forEach(el => {
+            const name = el.dataset.scale;
+            const min = Number(el.dataset.min || 1);
+            const max = Number(el.dataset.max);
+            for (let i = min; i <= max; i++) {
+                el.insertAdjacentHTML('beforeend',
+                    `<label><input type="radio" name="${name}" value="${i}"><span>${i}</span></label>`);
+            }
+            if (max === 5 && !("nolegend" in el.dataset) && !el.nextElementSibling?.classList.contains('scale-legend')) {
+                el.insertAdjacentHTML('afterend',
+                    '<div class="scale-legend"><span data-fr="Pas du tout satisfait" data-en="Not satisfied at all"></span><span data-fr="Très satisfait" data-en="Very satisfied"></span></div>');
+            }
+        });
+
+        // Choix uniques et multiples
+        document.querySelectorAll('[data-radio], [data-checkbox]').forEach(el => {
+            const type = el.dataset.radio ? 'radio' : 'checkbox';
+            const name = el.dataset.radio || el.dataset.checkbox;
+            el.dataset.options.split('|').forEach((value, i) => {
+                el.insertAdjacentHTML('beforeend',
+                    `<label><input type="${type}" name="${name}" value="${value}"><span data-idx="${i}"></span></label>`);
+            });
+        });
+
+        function applyLang(l) {
+            lang = l;
+            document.documentElement.lang = l;
+            document.querySelectorAll('[data-fr]').forEach(el => { el.textContent = el.dataset[l]; });
+            document.querySelectorAll('[data-ph-fr]').forEach(el => {
+                el.placeholder = l === 'fr' ? el.dataset.phFr : el.dataset.phEn;
+            });
+            document.querySelectorAll('[data-options]').forEach(el => {
+                const labels = (l === 'fr' ? el.dataset.labelsFr : el.dataset.labelsEn).split('|');
+                el.querySelectorAll('span[data-idx]').forEach(s => { s.textContent = labels[s.dataset.idx]; });
+            });
+            document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+        }
+
+        document.querySelectorAll('.lang-switch button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+        applyLang('fr');
+
+        const form = document.getElementById('survey');
+        const requiredBlocks = [...document.querySelectorAll('[data-required]')];
+
+        function isAnswered(block) {
+            return !!form.querySelector(`input[name="${block.dataset.required}"]:checked`);
+        }
+
+        function updateProgress() {
+            const done = requiredBlocks.filter(isAnswered).length;
+            document.getElementById('progress-bar').style.width = (done / requiredBlocks.length * 100) + '%';
+        }
+
+        form.addEventListener('change', e => {
+            const block = e.target.closest('[data-required]');
+            if (block && isAnswered(block)) block.classList.remove('invalid');
+            // « Rien pour l'instant » décoche les autres envies, et inversement
+            if (e.target.name === 'envies' && e.target.checked) {
+                form.querySelectorAll('input[name="envies"]').forEach(c => {
+                    if ((e.target.value === 'rien') !== (c.value === 'rien')) c.checked = false;
+                });
+            }
+            updateProgress();
+        });
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const missing = requiredBlocks.filter(b => !isAnswered(b));
+            requiredBlocks.forEach(b => b.classList.toggle('invalid', missing.includes(b)));
+            const err = document.getElementById('error-msg');
+            if (missing.length) {
+                err.style.display = 'block';
+                missing[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            err.style.display = 'none';
+
+            const data = new FormData(form);
+            const answers = { langue: lang, date: new Date().toISOString() };
+            for (const [key, value] of data.entries()) {
+                if (key === 'envies') (answers.envies ||= []).push(value);
+                else if (String(value).trim() !== '') answers[key] = /^\d+$/.test(value) && form.querySelector(`[data-scale="${key}"]`) ? Number(value) : String(value).trim();
+            }
+            lastAnswers = answers;
+            console.log('Réponses :', answers);
+
+            form.style.display = 'none';
+            document.querySelector('.progress').style.display = 'none';
+            document.getElementById('thanks').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.getElementById('download-json').addEventListener('click', () => {
+            if (!lastAnswers) return;
+            const blob = new Blob([JSON.stringify(lastAnswers, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'avis-equipe-reponses.json';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        });
+
+        document.getElementById('restart').addEventListener('click', () => {
+            form.reset();
+            requiredBlocks.forEach(b => b.classList.remove('invalid'));
+            updateProgress();
+            form.style.display = '';
+            document.querySelector('.progress').style.display = '';
+            document.getElementById('thanks').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
